@@ -1,0 +1,31 @@
+{% extends 'menu.html' %}
+{% load staticfiles %}
+{% block container %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Results
+        </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Unity</td>
+                        <td>Lesson</td>
+                        <th>Corrects</th>
+                        <th>Wrongs</th>
+                        <th>Finished at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr>
+                            <td>{{ lesson.unity.name }}</td>
+                            <td>{{ lesson.name }}</td>
+                            <td>{{ result.correct }}</td>
+                            <td>{{ result.wrong }}</td>
+                            <td>{{ result.finished_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+{% endblock %}

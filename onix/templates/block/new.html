@@ -1,0 +1,30 @@
+{% extends 'menu.html' %}
+{% load staticfiles %}
+{% block container %}
+    <form method="post" action="" style="max-width: 800px;margin:0 auto">
+        <div class="panel panel-default">
+            <div class="panel-body" style="padding: 40px;">
+                    {% csrf_token %}
+                    <h6 style="margin-bottom: 30px;">{{ question.name }}</h6>
+                    <div class="text-center">
+                        <img src="{{ question.image.url }}">
+                    </div>
+                    <div>
+                    {% for answer in answers %}
+                        <div class="radio">
+                            <label>
+                                <input data-toggle="radio" type="radio" name="answer" value="{{ answer.id }}">
+                                {{ answer.name }} - {{ answer.extra }}
+                            </label>
+                        </div>
+
+                    {% endfor %}
+                    </div>
+
+                    <button type="submit" class="btn btn-sm btn-primary pull-right">Answer <span class="glyphicon glyphicon-arrow-right"></span></button>
+
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
