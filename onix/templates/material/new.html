@@ -5,23 +5,19 @@
         <div class="panel panel-default">
             <div class="panel-body" style="padding: 30px;">
                 {% csrf_token %}
-                <h3 style="margin-bottom: 30px;">Cadastrar bloco </h3>
+                <h3 style="margin-bottom: 30px;">Cadastrar material </h3>
                 <div class="row">
                     <div class="col-lg-6">
 
                         <div class="form-group">
-                            <label>Nome do material:</label>
-                            <select class="form-control">
-                                {% for material in materials %}
-                                <option value="{{ material.id }}" name="material_id">{{ material.name }}</option>
-                                {% endfor %}
-                            </select>
+                            <label>Nome:</label>
+                            <input class="form-control" type="text" name="name" placeholder="Digite o nome do material.">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Número do bloco:</label>
-                            <input class="form-control" type="text" name="number" placeholder="Digite o número do bloco.">
+                            <label>Origem:</label>
+                            <input class="form-control" type="text" name="origin" placeholder="Digite o número do bloco.">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary pull-right">

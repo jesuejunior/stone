@@ -1,0 +1,37 @@
+{% extends 'menu.html' %}
+{% load staticfiles %}
+{% block container %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Registro de blocos
+        </div>
+        <div class="panel panel-body">
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr class="success">
+                        <th>Nome do material</th>
+                        <th>Número do bloco</th>
+                        <th>Código do bloco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for block in object_list %}
+                    <tr>
+                        <td>
+                            {{ block.name }}
+                        </td>
+                        <td>
+                            {{ block.number }}
+                        </td>
+                        <td>
+                            {{ block.code }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+
