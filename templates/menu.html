@@ -11,7 +11,10 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{% url "home" %}">Home</a></li>
 {#                    <li><a href="#prices">Pricing</a></li>#}
-                    <li><a href="#about">Quem somos</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'material' %}">Cadastrar material</a></li>
+                    <li><a href="{% url 'block' %}">Cadastrar bloco</a></li>
+                {% endif %}
                 </ul>
                 {% if not user.is_authenticated %}
                     <ul class="nav navbar-nav navbar-right">
