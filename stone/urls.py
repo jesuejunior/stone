@@ -17,12 +17,16 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from onix.views import BlockTemplateView, HomeTemplateView, BlockListTemplateView
+
+from onix.views.block import BlockTemplateView, BlockListTemplateView
+from onix.views.home import HomeTemplateView
+from onix.views.material import MaterialTemplateView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^$', HomeTemplateView.as_view(), name='home'),
     url(r'^block$', BlockTemplateView.as_view(), name='block'),
+    url(r'^material', MaterialTemplateView.as_view(), name='material'),
     url(r'^blocks$', BlockListTemplateView.as_view(), name='blocks'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
