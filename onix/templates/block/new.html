@@ -1,27 +1,32 @@
 {% extends 'menu.html' %}
 {% load staticfiles %}
 {% block container %}
-    <form method="post" action="" style="max-width: 800px;margin:0 auto">
+    <form method="post" action="" style="max-width: 700px;margin:0 auto">
         <div class="panel panel-default">
-            <div class="panel-body" style="padding: 40px;">
-                    {% csrf_token %}
-                    <h6 style="margin-bottom: 30px;">{{ question.name }}</h6>
-                    <div class="text-center">
-                        <img src="{{ question.image.url }}">
-                    </div>
-                    <div>
-                    {% for answer in answers %}
-                        <div class="radio">
-                            <label>
-                                <input data-toggle="radio" type="radio" name="answer" value="{{ answer.id }}">
-                                {{ answer.name }} - {{ answer.extra }}
-                            </label>
+            <div class="panel-body" style="padding: 30px;">
+                {% csrf_token %}
+                <h3 style="margin-bottom: 30px;">Cadastrar bloco </h3>
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <div class="form-group">
+                            <label>Nome do material:</label>
+                            <input class="form-control" type="text" name="name" placeholder="Digite o nome do material.">
                         </div>
-
-                    {% endfor %}
                     </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Número do bloco:</label>
+                            <input class="form-control" type="text" name="number" placeholder="Digite o número do bloco.">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">
+                    Salvar
+                    <span class="glyphicon glyphicon-floppy-saved"></span>
 
-                    <button type="submit" class="btn btn-sm btn-primary pull-right">Answer <span class="glyphicon glyphicon-arrow-right"></span></button>
+                </button>
+
+                </div>
 
             </div>
         </div>
