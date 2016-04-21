@@ -1,0 +1,44 @@
+{% extends 'menu.html' %}
+
+{% block container %}
+    <div class="form-register">
+
+        <h2 class="text-center">Sign Up</h2>
+
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <input id="id_username" maxlength="30" name="username" type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+
+                <label for="id_email">E-mail:</label>
+                <input id="id_email" name="email" type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="id_password1">Password:</label>
+                <input id="id_password1" name="password1" type="password" class="form-control">
+            </div>
+
+            <div class="form-group">
+
+                <label for="id_password2">Password (again):</label>
+                <input id="id_password2" name="password2" type="password" class="form-control">
+            </div>
+
+            <div class="form-group">
+            <button class="btn btn-lg btn-block btn-primary" type="submit" id="submit" >Sign Up</button>
+            </div>
+
+        </form>
+        <div>
+            <p class="text-right">
+                Already have an account? <a class="btn btn-link" href="{% url 'auth_login' %}">Log In</a>
+
+            </p>
+        </div>
+    </div>
+{% endblock %}

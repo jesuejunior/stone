@@ -1,0 +1,15 @@
+{% extends 'menu.html' %}
+{% load staticfiles %}
+{% block container %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Registro de blocos
+        </div>
+        <div class="panel panel-body">
+            <div class="row text-center ">
+                <a class="btn btn-primary btn-big" href="{% url 'blocks' %}">Ver todos os blocos</a>
+                <a class="btn btn-success btn-big" href="{% url 'block' %}">Cadastrar novo bloco</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

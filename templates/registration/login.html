@@ -1,0 +1,36 @@
+{% extends "menu.html" %}
+
+{% block container %}
+    <div class="form-register">
+
+        <h2 class="text-center">Log in</h2>
+        <form method="post" action="" >
+            {% csrf_token %}
+            <dl class="register">
+                    {% for field in form %}
+                        {% if field.errors %}
+                            <div class="myerrors clearfix alert alert-warning">{{ field.label_tag }}
+                                - {{ field.errors }}</div>{% endif %}
+                    {% endfor %}
+                </dl>
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <input id="id_username" maxlength="120" name="username" type="text" class=" require form-control" placeholder="Put your username" autofocus="">
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">Password:</label>
+                <input id="id_password" maxlength="40" name="password" type="password" class="form-control" placeholder="Put your password">
+            </div>
+
+            <button type="submit"  class="btn btn-lg btn-primary btn-block" id="submit">Login </button>
+
+        </form>
+        <div class="form-info">
+            <p class="text-right">
+                Don't have an account? <a href="{% url 'registration_register' %}">Sign Up</a>
+
+            </p>
+        </div>
+    </div>
+{% endblock %}
