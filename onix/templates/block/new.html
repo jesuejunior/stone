@@ -11,9 +11,9 @@
 
                         <div class="form-group">
                             <label>Nome do material:</label>
-                            <select class="form-control">
+                            <select class="form-control" name="material_id">
                                 {% for material in materials %}
-                                <option value="{{ material.id }}" name="material_id">{{ material.name }}</option>
+                                <option value="{{ material.id }}" >{{ material.name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
