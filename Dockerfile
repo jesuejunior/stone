@@ -1,15 +1,10 @@
-FROM alpine:3.3
-
-RUN apk add --no-cache python3 python3-dev libpq gcc  linux-headers musl-dev postgresql-dev && \
-    apk add --no-cache --virtual=build-dependencies wget ca-certificates && \
-    wget "https://bootstrap.pypa.io/get-pip.py" -O /dev/stdout | python3 && \
-    apk del build-dependencies
+FROM jesuejunior/python:3
 
 COPY . /stone
 
 WORKDIR /stone
 
-RUN pip install -r requirements.pip \
+RUN pip install -r requirements.txt \
 	&& python3 manage.py collectstatic --noinput
 
 EXPOSE 8000
