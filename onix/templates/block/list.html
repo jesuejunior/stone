@@ -1,6 +1,9 @@
 {% extends 'menu.html' %}
 {% load staticfiles %}
 {% block container %}
+     {% if status == 'ok' %}
+    <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endif %}
     <div class="panel panel-default">
         <div class="panel-heading">
             Registro de blocos

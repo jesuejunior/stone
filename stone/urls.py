@@ -28,5 +28,5 @@ urlpatterns = [
     url(r'^$', HomeTemplateView.as_view(), name='home'),
     url(r'^block$', BlockTemplateView.as_view(), name='block'),
     url(r'^material', MaterialTemplateView.as_view(), name='material'),
-    url(r'^blocks$', BlockListTemplateView.as_view(), name='blocks'),
+    url(r'^block/all$', BlockListTemplateView.as_view(), name='blocks'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

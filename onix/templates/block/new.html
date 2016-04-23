@@ -1,6 +1,9 @@
 {% extends 'menu.html' %}
 {% load staticfiles %}
 {% block container %}
+    {% if status == 'error' %}
+    <div class="alert alert-warning" role="alert">{{ message }}</div>
+    {% endif %}
     <form method="post" action="" style="max-width: 700px;margin:0 auto">
         <div class="panel panel-default">
             <div class="panel-body" style="padding: 30px;">
@@ -21,7 +24,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Número do bloco:</label>
-                            <input class="form-control" type="text" name="number" placeholder="Digite o número do bloco.">
+                            <input class="form-control" type="text" name="number" maxlength="5" placeholder="Digite o número do bloco.">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary pull-right">

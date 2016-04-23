@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, InvalidPage, Empt
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response, render
 from django.template.response import TemplateResponse
 from django.views.generic import View, ListView
 
@@ -23,6 +24,7 @@ class BlockTemplateView(LoginRequiredMixin, View):
         )
 
     def post(self, request, *args, **kwargs):
+        cxt = self.get_context_data(request)
         material_id = request.POST.get('material_id')
         number = request.POST.get('number')
         code = None
@@ -32,19 +34,29 @@ class BlockTemplateView(LoginRequiredMixin, View):
             if not Block.objects.filter(code=code).exists():
                 break
 
-        if request.user.is_authenticated() and number:
-            result = Block.objects.get_or_create(material_id=material_id, number=number, code=code)
+        if request.user.is_authenticated() and number and material_id:
+            if Block.objects.filter(material_id=material_id, number=number).exists():
+                material = Material.objects.get(pk=material_id).name
+                cxt['message']= u'O código [{0}] já foi utilizada para [{1}], por favor verifique os dados.'.format(number, material)
+                cxt['status'] = 'error'
+                return TemplateResponse(
+                    request=self.request,
+                    template=self.template_name,
+                    context=cxt,
+                    status=400,
+                    **kwargs
+                )
 
+            result = Block.objects.get_or_create(material_id=material_id, number=number, code=code)
             saved = result[0].save()
 
-        if saved:
-            return HttpResponse(reverse('blocks'), data={'response': 200})
-
+            if saved:
+                return HttpResponse(reverse('blocks'), content={'message': 'Bloco criado com sucesso.', 'status': 'ok'})
         return HttpResponseRedirect(reverse('blocks'))
 
     def get_context_data(self, request):
 
-        _question = Block.objects.all()
+        _question = Block.objects.select_related().all()
         paginator = Paginator(_question, 50)
 
         page = request.GET.get('page')
