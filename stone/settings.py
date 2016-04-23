@@ -16,12 +16,12 @@ import sys
 
 # set configs to prod
 
-#DATABASE_NAME = os.environ.get('DATABASE_NAME', 'stone')
-#DATABASE_HOST = os.environ.get('DATABASE_HOST', '127.0.0.1')
-#DATABASE_USER = os.environ.get('DATABASE_USER', 'postgres')
-#DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD', '123456')
+DATABASE_NAME = os.environ.get('DATABASE_NAME', 'stone')
+DATABASE_HOST = os.environ.get('DATABASE_HOST', '127.0.0.1')
+DATABASE_USER = os.environ.get('DATABASE_USER', 'stone')
+DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD', '123456')
 
-#MEMCACHED_HOST = os.environ.get('MEMCACHED_HOST', '127.0.0.1')
+MEMCACHED_HOST = os.environ.get('MEMCACHED_HOST', '127.0.0.1')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -87,31 +87,34 @@ WSGI_APPLICATION = 'stone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': DATABASE_NAME,
-#         'USER': DATABASE_USER,
-#         'PASSWORD': DATABASE_PASSWORD,
-#         'HOST': DATABASE_HOST,
-#         'PORT': '5432',
-#     }
-# }
+if not DEBUG:
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'stone.db'),
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.sqlite3',
+			'NAME': os.path.join(BASE_DIR, 'stone.db'),
+		}
+	}
+else:
+	DATABASES = {
+	    'default': {
+	        'ENGINE': 'django.db.backends.postgresql.psycopg2',
+	        'NAME': DATABASE_NAME,
+	        'USER': DATABASE_USER,
+	        'PASSWORD': DATABASE_PASSWORD,
+	        'HOST': DATABASE_HOST,
+	        'PORT': '5432',
+	    }
+	}
+
+if not DEBUG:
+
+	CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': MEMCACHED_HOST,
+        }
     }
-}
-# if not DEBUG:
-#
-#     CACHES = {
-#         'default': {
-#             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#             'LOCATION': MEMCACHED_HOST,
-#         }
-#     }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -189,6 +192,6 @@ LOGGING = {
 }
 
 try:
-    from .settings_local import *
+	from .settings_local import *
 except ImportError:
-    print('O arquivo .settings_local.py nao foi encontrado.')
+	print('O arquivo .settings_local.py nao foi encontrado.')

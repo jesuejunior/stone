@@ -1,7 +1,7 @@
 Django==1.8.12
 django-braces==1.8.1
 django-registration==2.0.3
-#psycopg2==2.6.1
+psycopg2==2.6.1
 python-memcached==1.57
-gunicorn==19.4.1
+gunicorn==19.4.5
 django-suit==0.2.15
