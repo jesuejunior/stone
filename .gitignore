@@ -93,3 +93,4 @@ output/
 .idea/
 .DS_Store
 stone.db
+.env
