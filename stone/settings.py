@@ -33,7 +33,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ego4*=-lpv6u+9iq6wed&7%#=_ywu@6i_i0)m0)*ew#%wgw67x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = not bool(os.environ.get('PROD', ''))
+PROD = bool(os.environ.get('PROD', ''))
+DEBUG = not PROD
 
 ALLOWED_HOSTS = ['*']
 
@@ -88,15 +89,15 @@ WSGI_APPLICATION = 'stone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-if not DEBUG:
-
+if not PROD:
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.sqlite3',
 			'NAME': os.path.join(BASE_DIR, 'stone.db'),
 		}
 	}
-else:
+
+if PROD:
 	DATABASES = {
 	    'default': {
 	        'ENGINE': 'django.db.backends.postgresql_psycopg2',
