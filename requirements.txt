@@ -5,3 +5,4 @@ psycopg2==2.6.1
 python-memcached==1.57
 gunicorn==19.4.5
 django-suit==0.2.15
+whitenoise==3.3.0
