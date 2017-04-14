@@ -33,7 +33,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ego4*=-lpv6u+9iq6wed&7%#=_ywu@6i_i0)m0)*ew#%wgw67x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = not os.environ.get('PROD', False)
+DEBUG = not bool(os.environ.get('PROD', ''))
 
 ALLOWED_HOSTS = ['*']
 
@@ -107,15 +107,15 @@ else:
 	    }
 	}
 
-if not DEBUG:
-
-	CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': MEMCACHED_HOST,
-        }
-    }
-
+# if not DEBUG:
+#
+# 	CACHES = {
+#         'default': {
+#             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#             'LOCATION': MEMCACHED_HOST,
+#         }
+#     }
+#
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
