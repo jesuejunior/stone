@@ -3,6 +3,6 @@ django-braces==1.8.1
 django-registration==2.0.3
 psycopg2==2.6.1
 python-memcached==1.57
-gunicorn==19.4.5
+gunicorn==19.5.0
 django-suit==0.2.15
 whitenoise==3.3.0
